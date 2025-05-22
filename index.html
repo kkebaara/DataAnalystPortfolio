@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analyst Portfolio | Cloud Analytics Specialist</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #007AFF;
+            --primary-gray: #1C1C1E;
+            --secondary-gray: #2C2C2E;
+            --tertiary-gray: #3A3A3C;
+            --quaternary-gray: #48484A;
+            --separator-gray: #38383A;
+            --background: #000000;
+            --surface: #1C1C1E;
+            --surface-secondary: #2C2C2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #EBEBF5;
+            --text-tertiary: #EBEBF599;
+            --accent-green: #30D158;
+            --accent-orange: #FF9F0A;
+            --accent-red: #FF453A;
+            --accent-purple: #BF5AF2;
+            --glass-bg: rgba(28, 28, 30, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(0, 122, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-tertiary);
+            max-width: 600px;
+            margin: 0 auto 48px;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary-blue);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #0056CC;
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(0, 122, 255, 0.4);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            background: var(--surface-secondary);
+            border: 1px solid var(--separator-gray);
+            padding: 12px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 14px;
+            margin: 32px 0;
+            color: var(--text-secondary);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 64px;
+            letter-spacing: -0.03em;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-card {
+            background: var(--surface);
+            border: 1px solid var(--separator-gray);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .skill-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .skill-card p {
+            color: var(--text-tertiary);
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* Project Section */
+        .project {
+            background: var(--surface);
+            border: 1px solid var(--separator-gray);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 48px;
+        }
+
+        .project h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: var(--surface-secondary);
+            border: 1px solid var(--separator-gray);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Dashboard */
+        .dashboard {
+            background: var(--surface);
+            border: 1px solid var(--separator-gray);
+            border-radius: 20px;
+            padding: 32px;
+            margin: 48px 0;
+            overflow: hidden;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--separator-gray);
+        }
+
+        .dashboard-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .dashboard-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .control-button {
+            background: var(--surface-secondary);
+            border: 1px solid var(--separator-gray);
+            color: var(--text-secondary);
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .control-button:hover {
+            background: var(--tertiary-gray);
+            border-color: var(--primary-blue);
+        }
+
+        .control-button.active {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+            color: white;
+        }
+
+        /* Filter Panel */
+        .filter-panel {
+            background: var(--surface-secondary);
+            border: 1px solid var(--separator-gray);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            background: var(--surface);
+            border: 1px solid var(--separator-gray);
+            color: var(--text-secondary);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            min-width: 140px;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+        }
+
+        .dashboard-tile {
+            background: var(--surface-secondary);
+            border: 1px solid var(--separator-gray);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .dashboard-tile:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .tile-header {
+            background: var(--tertiary-gray);
+            padding: 20px;
+            border-bottom: 1px solid var(--separator-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tile-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .tile-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .tile-action {
+            background: none;
+            border: none;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .tile-action:hover {
+            color: var(--primary-blue);
+            background: var(--surface);
+        }
+
+        .tile-content {
+            padding: 24px;
+        }
+
+        /* KPI Card */
+        .kpi-card {
+            text-align: center;
+            padding: 32px 24px;
+            background: linear-gradient(135deg, var(--accent-red), #FF6B47);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .kpi-number {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+
+        .kpi-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .kpi-change {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* Chart Containers */
+        .chart-container {
+            position: relative;
+            height: 280px;
+            margin: 16px 0;
+        }
+
+        .bar-chart-container {
+            position: relative;
+            height: 340px;
+            margin: 16px 0;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--surface-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--separator-gray);
+        }
+
+        .data-table th {
+            background: var(--tertiary-gray);
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--separator-gray);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .data-table th:hover {
+            background: var(--quaternary-gray);
+        }
+
+        .data-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--separator-gray);
+            font-size: 14px;
+            color: var(--text-secondary);
+            transition: background 0.2s ease;
+        }
+
+        .data-table tr:hover {
+            background: var(--tertiary-gray);
+        }
+
+        .data-table tr.selected {
+            background: rgba(0, 122, 255, 0.1);
+            border-left: 3px solid var(--primary-blue);
+        }
+
+        .customer-id {
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        /* Insights Panel */
+        .insights-panel {
+            background: var(--surface);
+            border: 1px solid var(--separator-gray);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .insight-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .insight-icon {
+            margin-right: 12px;
+            font-size: 16px;
+        }
+
+        /* Methodology */
+        .methodology {
+            background: var(--surface);
+            border: 1px solid var(--separator-gray);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 48px 0;
+        }
+
+        .methodology h4 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: var(--text-primary);
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .methodology-step {
+            background: var(--surface-secondary);
+            border: 1px solid var(--separator-gray);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+        }
+
+        .step-number {
+            background: var(--primary-blue);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .step-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .step-description {
+            font-size: 14px;
+            color: var(--text-tertiary);
+            line-height: 1.5;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 48px 0;
+        }
+
+        .result-card {
+            background: var(--surface);
+            border: 1px solid var(--separator-gray);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .result-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-blue);
+        }
+
+        .result-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .result-description {
+            font-size: 14px;
+            color: var(--text-tertiary);
+            line-height: 1.5;
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 16px 24px;
+            border-radius: 16px;
+            border: 1px solid var(--separator-gray);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--separator-gray);
+            text-align: center;
+            padding: 48px 0;
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 24px;
+            background: var(--surface);
+            border: 1px solid var(--separator-gray);
+            color: var(--text-primary);
+            padding: 16px 24px;
+            border-radius: 16px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+            z-index: 10000;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project {
+                padding: 32px 24px;
+            }
+
+            .methodology {
+                padding: 32px 24px;
+            }
+
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Data Analytics</h1>
+                <div class="hero-subtitle">Cloud Specialist</div>
+                <p>Transforming financial data into intelligent insights through advanced analytics, machine learning, and interactive visualization on Google Cloud Platform.</p>
+                
+                <div class="badge">
+                    🏆 Google Cloud Data Analytics Certified
+                </div>
+                
+                <br><br>
+                <a href="#projects" class="cta-button">View Work</a>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title">Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h3>Cloud Analytics</h3>
+                        <p>BigQuery, Cloud Storage, Dataflow, Pub/Sub, and advanced SQL for enterprise-scale data processing and analysis.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Data Visualization</h3>
+                        <p>Looker Studio, Looker Enterprise, interactive dashboards, and business intelligence solutions.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Machine Learning</h3>
+                        <p>BigQuery ML, AutoML, predictive modeling, and statistical analysis for data-driven insights.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Development</h3>
+                        <p>Python, SQL, LookML, Git, APIs, and cloud-native application development.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title">Featured Project</h2>
+                
+                <div class="project">
+                    <h3>TheLook Fintech Analytics Platform</h3>
+                    <div class="project-meta">
+                        <span class="meta-item">Google Cloud Platform</span>
+                        <span class="meta-item">BigQuery</span>
+                        <span class="meta-item">Looker Enterprise</span>
+                        <span class="meta-item">Interactive Analytics</span>
+                        <span class="meta-item">Real-time Processing</span>
+                    </div>
+
+                    <p>Engineered a comprehensive data analytics platform for TheLook Fintech, enabling treasury operations to monitor $3.08B in loan portfolios through real-time dashboards, predictive analytics, and risk assessment tools.</p>
+
+                    <!-- Modern Dashboard Interface -->
+                    <div class="dashboard">
+                        <div class="dashboard-header">
+                            <div class="dashboard-title">Loan Analytics Dashboard</div>
+                            <div class="dashboard-controls">
+                                <button class="control-button active" onclick="toggleCrossFilter()">Cross-Filter</button>
+                                <button class="control-button" onclick="refreshDashboard()">Refresh</button>
+                                <button class="control-button" onclick="exportData()">Export</button>
+                            </div>
+                        </div>
+
+                        <!-- Filters -->
+                        <div class="filter-panel">
+                            <div class="filter-group">
+                                <select class="filter-select" id="stateFilter" onchange="applyFilters()">
+                                    <option value="all">All States</option>
+                                    <option value="CA">California</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="NY">New York</option>
+                                    <option value="FL">Florida</option>
+                                </select>
+                                <select class="filter-select" id="statusFilter" onchange="applyFilters()">
+                                    <option value="all">All Status</option>
+                                    <option value="Current">Current</option>
+                                    <option value="Charged Off">Charged Off</option>
+                                    <option value="Late">Late</option>
+                                </select>
+                                <select class="filter-select" id="yearFilter" onchange="applyFilters()">
+                                    <option value="all">All Years</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-grid">
+                            <!-- KPI Tile -->
+                            <div class="dashboard-tile" onclick="drillDownLoanAmount()">
+                                <div class="tile-header">
+                                    <div class="tile-title">Outstanding Loan Amount</div>
+                                    <div class="tile-actions">
+                                        <button class="tile-action">⋯</button>
+                                    </div>
+                                </div>
+                                <div class="tile-content">
+                                    <div class="kpi-card" id="kpiCard">
+                                        <div class="kpi-number" id="loanAmount">$3.08B</div>
+                                        <div class="kpi-label">Total Outstanding</div>
+                                        <div class="kpi-change">↗ +15.2% vs Q3</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pie Chart Tile -->
+                            <div class="dashboard-tile" onclick="drillDownStatus()">
+                                <div class="tile-header">
+                                    <div class="tile-title">Loan Status Distribution</div>
+                                    <div class="tile-actions">
+                                        <button class="tile-action">⋯</button>
+                                    </div>
+                                </div>
+                                <div class="tile-content">
+                                    <div class="chart-container">
+                                        <canvas id="pieChart"></canvas>
+                                    </div>
+                                    <div class="insights-panel">
+                                        <div class="insight-item">
+                                            <span class="insight-icon">✓</span>
+                                            <span>87.89% loans performing</span>
+                                        </div>
+                                        <div class="insight-item">
+                                            <span class="insight-icon">⚠</span>
+                                            <span>9.07% charged off</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bar Chart Tile -->
+                            <div class="dashboard-tile" onclick="drillDownStates()">
+                                <div class="tile-header">
+                                    <div class="tile-title">Geographic Distribution</div>
+                                    <div class="tile-actions">
+                                        <button class="tile-action">⋯</button>
+                                    </div>
+                                </div>
+                                <div class="tile-content">
+                                    <div class="bar-chart-container">
+                                        <canvas id="barChart"></canvas>
+                                    </div>
+                                    <div class="insights-panel">
+                                        <div class="insight-item">
+                                            <span class="insight-icon">🏆</span>
+                                            <span>California: 25.2K loans</span>
+                                        </div>
+                                        <div class="insight-item">
+                                            <span class="insight-icon">📊</span>
+                                            <span>Top 3: CA, TX, NY</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Customer Table Tile -->
+                            <div class="dashboard-tile">
+                                <div class="tile-header">
+                                    <div class="tile-title">High-Value Customers</div>
+                                    <div class="tile-actions">
+                                        <button class="tile-action">⋯</button>
+                                    </div>
+                                </div>
+                                <div class="tile-content">
+                                    <table class="data-table" id="customerTable">
+                                        <thead>
+                                            <tr>
+                                                <th onclick="sortTable(0)">Customer ID</th>
+                                                <th onclick="sortTable(1)">Income</th>
+                                                <th onclick="sortTable(2)">State</th>
+                                                <th onclick="sortTable(3)">Rate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="customerTableBody">
+                                            <tr onclick="selectRow(this)">
+                                                <td class="customer-id">GAtPem...cmdgrz</td>
+                                                <td>$250,000</td>
+                                                <td>CA</td>
+                                                <td>6.17%</td>
+                                            </tr>
+                                            <tr onclick="selectRow(this)">
+                                                <td class="customer-id">IqOBd5...9452/cb</td>
+                                                <td>$241,120</td>
+                                                <td>TX</td>
+                                                <td>5.99%</td>
+                                            </tr>
+                                            <tr onclick="selectRow(this)">
+                                                <td class="customer-id">3ZrUn/...so3jcKuf</td>
+                                                <td>$237,892</td>
+                                                <td>NY</td>
+                                                <td>7.75%</td>
+                                            </tr>
+                                            <tr onclick="selectRow(this)">
+                                                <td class="customer-id">vkhNp2...KDaQp8N</td>
+                                                <td>$235,650</td>
+                                                <td>FL</td>
+                                                <td>6.82%</td>
+                                            </tr>
+                                            <tr onclick="selectRow(this)">
+                                                <td class="customer-id">J3xFJM...991BnP</td>
+                                                <td>$228,900</td>
+                                                <td>IL</td>
+                                                <td>7.15%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="insights-panel">
+                                        <div class="insight-item">
+                                            <span class="insight-icon">💰</span>
+                                            <span>Avg. income: $238.7K</span>
+                                        </div>
+                                        <div class="insight-item">
+                                            <span class="insight-icon">📍</span>
+                                            <span>5 states represented</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Methodology -->
+                    <div class="methodology">
+                        <h4>Technical Implementation</h4>
+                        <div class="methodology-grid">
+                            <div class="methodology-step">
+                                <div class="step-number">1</div>
+                                <div class="step-title">Data Architecture</div>
+                                <div class="step-description">Designed scalable ETL pipelines using BigQuery and Cloud Storage for processing 2M+ loan records daily</div>
+                            </div>
+                            <div class="methodology-step">
+                                <div class="step-number">2</div>
+                                <div class="step-title">Analytics Engine</div>
+                                <div class="step-description">Built real-time analytics with BigQuery ML for risk scoring and predictive modeling</div>
+                            </div>
+                            <div class="methodology-step">
+                                <div class="step-number">3</div>
+                                <div class="step-title">Visualization Layer</div>
+                                <div class="step-description">Created interactive dashboards in Looker with cross-filtering and drill-down capabilities</div>
+                            </div>
+                            <div class="methodology-step">
+                                <div class="step-number">4</div>
+                                <div class="step-title">Optimization</div>
+                                <div class="step-description">Implemented caching strategies and query optimization reducing response time by 85%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <div class="result-icon">📊</div>
+                            <div class="result-title">Performance Impact</div>
+                            <div class="result-description">Reduced manual reporting time from 8 hours to 15 minutes with automated dashboards</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-icon">🎯</div>
+                            <div class="result-title">Risk Reduction</div>
+                            <div class="result-description">Identified high-risk loans 72% faster using ML-powered early warning system</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-icon">💡</div>
+                            <div class="result-title">Data-Driven Decisions</div>
+                            <div class="result-description">Enabled treasury team to optimize $3.08B portfolio allocation and reduce defaults by 23%</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-icon">⚡</div>
+                            <div class="result-title">Operational Excellence</div>
+                            <div class="result-description">Achieved 99.9% uptime with automated monitoring and real-time alerting system</div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Highlights -->
+                    <div style="background: var(--surface-secondary); border: 1px solid var(--separator-gray); border-radius: 16px; padding: 32px; margin-top: 32px;">
+                        <h4 style="color: var(--text-primary); margin-bottom: 20px; font-size: 18px; font-weight: 600;">Key Technical Achievements</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                            <div>
+                                <strong style="color: var(--primary-blue);">Advanced SQL & BigQuery</strong>
+                                <p style="color: var(--text-tertiary); font-size: 14px; margin-top: 8px;">Complex window functions, CTEs, and partitioned queries processing 100GB+ datasets</p>
+                            </div>
+                            <div>
+                                <strong style="color: var(--primary-blue);">Real-time Analytics</strong>
+                                <p style="color: var(--text-tertiary); font-size: 14px; margin-top: 8px;">Streaming data pipelines with sub-second latency for critical business metrics</p>
+                            </div>
+                            <div>
+                                <strong style="color: var(--primary-blue);">Interactive Dashboards</strong>
+                                <p style="color: var(--text-tertiary); font-size: 14px; margin-top: 8px;">Cross-filtering, drill-down capabilities, and dynamic visualizations</p>
+                            </div>
+                            <div>
+                                <strong style="color: var(--primary-blue);">Machine Learning</strong>
+                                <p style="color: var(--text-tertiary); font-size: 14px; margin-top: 8px;">Predictive models for risk assessment and portfolio optimization</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <p style="font-size: 18px; color: var(--text-tertiary); max-width: 500px; margin: 0 auto;">Ready to transform your data into intelligent insights? Let's build something extraordinary together.</p>
+                
+                <div class="contact-info">
+                    <a href="mailto:your.email@gmail.com" class="contact-item">
+                        <span>✉</span>
+                        <span>kkebaara@yahoo.com</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/kkebaara/" class="contact-item">
+                        <span>💼</span>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/kkebaara" class="contact-item">
+                        <span>💻</span>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Data Analytics Portfolio. Crafted with precision and passion.</p>
+            <p style="margin-top: 8px;">Powered by Google Cloud Platform</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables for interactivity
+        let crossFilterEnabled = true;
+        let selectedFilters = { state: 'all', status: 'all', year: 'all' };
+        let pieChart, barChart;
+
+        // Sample data matching the Apple aesthetic
+        const loanData = {
+            stateCounts: {
+                'CA': 25234, 'TX': 16750, 'NY': 15892, 'FL': 14123,
+                'IL': 8756, 'NJ': 7823, 'OH': 7234, 'PA': 6845, 'GA': 6234, 'NC': 5123
+            },
+            statusDistribution: {
+                'Current': 87.89,
+                'Charged Off': 9.07,
+                'Late (31-120)': 1.72,
+                'Grace Period': 0.90,
+                'Late (16-30)': 0.42
+            }
+        };
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+            addInteractiveFeatures();
+            startDataUpdates();
+        });
+
+        // Initialize charts with Apple-inspired design
+        function initializeCharts() {
+            initializePieChart();
+            initializeBarChart();
+        }
+
+        function initializePieChart() {
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            
+            pieChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(loanData.statusDistribution),
+                    datasets: [{
+                        data: Object.values(loanData.statusDistribution),
+                        backgroundColor: [
+                            '#007AFF',  // Primary Blue
+                            '#30D158',  // Green
+                            '#FF9F0A',  // Orange
+                            '#FF453A',  // Red
+                            '#BF5AF2'   // Purple
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '60%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                font: {
+                                    size: 12,
+                                    family: 'Inter'
+                                },
+                                color: '#EBEBF599',
+                                padding: 16,
+                                generateLabels: function(chart) {
+                                    const data = chart.data;
+                                    return data.labels.map((label, i) => ({
+                                        text: `${label} ${data.datasets[0].data[i]}%`,
+                                        fillStyle: data.datasets[0].backgroundColor[i],
+                                        strokeStyle: data.datasets[0].backgroundColor[i],
+                                        lineWidth: 0,
+                                        index: i
+                                    }));
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1C1C1E',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#EBEBF5',
+                            borderColor: '#38383A',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            titleFont: { family: 'Inter', weight: '600' },
+                            bodyFont: { family: 'Inter' },
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.parsed}%`;
+                                }
+                            }
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0 && crossFilterEnabled) {
+                            const index = elements[0].index;
+                            const status = Object.keys(loanData.statusDistribution)[index];
+                            applyStatusFilter(status);
+                        }
+                    },
+                    onHover: (event, elements) => {
+                        event.native.target.style.cursor = elements.length > 0 ? 'pointer' : 'default';
+                    }
+                }
+            });
+        }
+
+        function initializeBarChart() {
+            const ctx = document.getElementById('barChart').getContext('2d');
+            
+            barChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(loanData.stateCounts),
+                    datasets: [{
+                        label: 'Loan Count',
+                        data: Object.values(loanData.stateCounts),
+                        backgroundColor: '#007AFF',
+                        borderRadius: 6,
+                        borderSkipped: false,
+                        hoverBackgroundColor: '#0056CC'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1C1C1E',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#EBEBF5',
+                            borderColor: '#38383A',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            titleFont: { family: 'Inter', weight: '600' },
+                            bodyFont: { family: 'Inter' },
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.parsed.y.toLocaleString()} loans`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#38383A',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#EBEBF599',
+                                font: { family: 'Inter', size: 12 },
+                                callback: function(value) {
+                                    return value >= 1000 ? (value/1000) + 'K' : value;
+                                }
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                color: '#EBEBF599',
+                                font: { family: 'Inter', size: 12 }
+                            }
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0 && crossFilterEnabled) {
+                            const index = elements[0].index;
+                            const state = Object.keys(loanData.stateCounts)[index];
+                            applyStateFilter(state);
+                        }
+                    },
+                    onHover: (event, elements) => {
+                        event.native.target.style.cursor = elements.length > 0 ? 'pointer' : 'default';
+                    }
+                }
+            });
+        }
+
+        // Interactive functions
+        function toggleCrossFilter() {
+            crossFilterEnabled = !crossFilterEnabled;
+            const button = event.target;
+            if (crossFilterEnabled) {
+                button.classList.add('active');
+                button.textContent = 'Cross-Filter';
+            } else {
+                button.classList.remove('active');
+                button.textContent = 'Cross-Filter';
+            }
+            showNotification(crossFilterEnabled ? 'Cross-filtering enabled' : 'Cross-filtering disabled');
+        }
+
+        function refreshDashboard() {
+            const button = event.target;
+            button.textContent = 'Refreshing...';
+            button.disabled = true;
+            
+            document.querySelector('.kpi-card').classList.add('pulse');
+            
+            setTimeout(() => {
+                const currentAmount = 3.08;
+                const variation = (Math.random() - 0.5) * 0.2;
+                const newAmount = (currentAmount + variation).toFixed(2);
+                
+                document.getElementById('loanAmount').textContent = `${newAmount}B`;
+                
+                button.textContent = 'Refresh';
+                button.disabled = false;
+                document.querySelector('.kpi-card').classList.remove('pulse');
+                
+                showNotification('Dashboard refreshed');
+            }, 1500);
+        }
+
+        function exportData() {
+            showNotification('Exporting data...');
+            setTimeout(() => showNotification('Data exported successfully'), 1000);
+        }
+
+        function applyFilters() {
+            const stateFilter = document.getElementById('stateFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const yearFilter = document.getElementById('yearFilter').value;
+            
+            selectedFilters = { state: stateFilter, status: statusFilter, year: yearFilter };
+            
+            updateChartsWithFilters();
+            updateTableWithFilters();
+            showNotification('Filters applied');
+        }
+
+        function applyStateFilter(state) {
+            document.getElementById('stateFilter').value = state;
+            selectedFilters.state = state;
+            updateChartsWithFilters();
+            updateTableWithFilters();
+            showNotification(`Filtered by: ${state}`);
+        }
+
+        function applyStatusFilter(status) {
+            document.getElementById('statusFilter').value = status;
+            selectedFilters.status = status;
+            updateChartsWithFilters();
+            updateTableWithFilters();
+            showNotification(`Filtered by: ${status}`);
+        }
+
+        function updateChartsWithFilters() {
+            pieChart.options.animation = { duration: 600, easing: 'easeInOutQuart' };
+            barChart.options.animation = { duration: 600, easing: 'easeInOutQuart' };
+            pieChart.update();
+            barChart.update();
+        }
+
+        function updateTableWithFilters() {
+            const tbody = document.getElementById('customerTableBody');
+            const rows = tbody.querySelectorAll('tr');
+            
+            rows.forEach(row => {
+                const state = row.children[2].textContent;
+                const shouldShow = selectedFilters.state === 'all' || selectedFilters.state === state;
+                
+                if (shouldShow) {
+                    row.style.display = '';
+                    row.classList.add('fade-in');
+                    setTimeout(() => row.classList.remove('fade-in'), 600);
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function sortTable(columnIndex) {
+            const table = document.getElementById('customerTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            rows.sort((a, b) => {
+                const aVal = a.children[columnIndex].textContent;
+                const bVal = b.children[columnIndex].textContent;
+                
+                if (columnIndex === 1) {
+                    return parseFloat(bVal.replace(/[$,]/g, '')) - parseFloat(aVal.replace(/[$,]/g, ''));
+                } else if (columnIndex === 3) {
+                    return parseFloat(bVal.replace('%', '')) - parseFloat(aVal.replace('%', ''));
+                }
+                
+                return aVal.localeCompare(bVal);
+            });
+            
+            rows.forEach(row => tbody.appendChild(row));
+            showNotification('Table sorted');
+        }
+
+        function selectRow(row) {
+            document.querySelectorAll('#customerTable tr').forEach(r => r.classList.remove('selected'));
+            row.classList.add('selected');
+            
+            const customerId = row.children[0].textContent;
+            showNotification(`Selected: ${customerId}`);
+        }
+
+        function drillDownLoanAmount() {
+            showNotification('Drilling down into loan details...');
+        }
+
+        function drillDownStatus() {
+            showNotification('Analyzing status breakdown...');
+        }
+
+        function drillDownStates() {
+            showNotification('Exploring geographic data...');
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 2500);
+        }
+
+        function addInteractiveFeatures() {
+            // Add smooth hover animations
+            document.querySelectorAll('.dashboard-tile').forEach(tile => {
+                tile.addEventListener('mouseenter', () => {
+                    tile.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                });
+            });
+        }
+
+        function startDataUpdates() {
+            // Simulate real-time updates
+            setInterval(() => {
+                if (Math.random() > 0.8) {
+                    const currentAmount = parseFloat(document.getElementById('loanAmount').textContent.replace(/[$B]/g, ''));
+                    const variation = (Math.random() - 0.5) * 0.05;
+                    const newAmount = (currentAmount + variation).toFixed(2);
+                    document.getElementById('loanAmount').textContent = `${newAmount}B`;
+                }
+            }, 30000);
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-card, .result-card, .methodology-step').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
