@@ -1,2 +1,2 @@
 # DataAnalystPortfolio
-Interactive Data Analytics Portfolio - Google Cloud Certified
+Interactive Data Analytics Portfolio - Google Cloud Certification
