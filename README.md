@@ -243,8 +243,8 @@ ORDER BY total_amount DESC;
 ## 📞 **Contact & Collaboration**
 
 ### **Let's Connect**
-- **📧 Email**: [your.email@gmail.com](mailto:your.email@gmail.com)
-- **💼 LinkedIn**: [Connect on LinkedIn](https://linkedin.com/in/yourprofile)
+- **📧 Email**: [kkebaara@yahoo.com](mailto:kkebaara@yahoo.com)
+- **💼 LinkedIn**: [Connect on LinkedIn](https://linkedin.com/in/kkebaara)
 - **💻 GitHub**: [View More Projects](https://github.com/kkebaara)
 - **🌐 Portfolio**: [Live Demo](https://kkebaara.github.io/DataAnalystPortfolio/index.html)
 
