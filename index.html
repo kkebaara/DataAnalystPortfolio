@@ -9,6 +9,85 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            width: 100vw;
+            height: calc(100vh - 64px);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .mobile-menu.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .mobile-menu a {
+            color: var(--text-primary);
+            font-size: 24px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 12px 32px;
+            border-radius: 24px;
+            background: var(--surface-secondary);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+        }
+        .mobile-menu a:hover {
+            background: var(--primary-blue);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 2100;
+        }
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 4px;
+            background: var(--text-primary);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none !important;
+            }
+            .hamburger {
+                display: flex;
+            }
+        }
+        /* Hero SVG Background */
+        .hero-bg-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
         :root {
             --primary-blue: #007AFF;
             --primary-gray: #1C1C1E;
@@ -108,7 +187,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(48px, 8vw, 96px);
+            font-size: clamp(36px, 5vw, 64px);
             font-weight: 700;
             letter-spacing: -0.04em;
             margin-bottom: 24px;
@@ -119,7 +198,7 @@
         }
 
         .hero-subtitle {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 500;
             color: var(--text-secondary);
             margin-bottom: 16px;
@@ -170,11 +249,11 @@
 
         /* Section Styling */
         .section {
-            padding: 120px 0;
+            padding: 64px 0;
         }
 
         .section-title {
-            font-size: 48px;
+            font-size: 32px;
             font-weight: 700;
             text-align: center;
             margin-bottom: 64px;
@@ -637,7 +716,7 @@
         /* Contact Section */
         .contact {
             text-align: center;
-            padding: 120px 0;
+            padding: 64px 0;
         }
 
         .contact-info {
@@ -655,8 +734,9 @@
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            padding: 16px 24px;
-            border-radius: 16px;
+            font-size: 18px;
+            padding: 10px 18px;
+            border-radius: 12px;
             border: 1px solid var(--separator-gray);
             transition: all 0.3s ease;
         }
@@ -800,22 +880,40 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="hamburger" aria-label="Open menu" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
         </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#home" onclick="toggleMobileMenu()">Home</a>
+            <a href="#skills" onclick="toggleMobileMenu()">Skills</a>
+            <a href="#projects" onclick="toggleMobileMenu()">Projects</a>
+            <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+        </div>
     </header>
 
     <main>
         <section id="home" class="hero">
-            <div class="container">
-                <h1>Kenneth Kebaara</h1>
-                <div class="hero-subtitle">Data Analytics & Cloud Specialist</div>
-                <p>Transforming financial data into intelligent insights through advanced analytics, machine learning, and interactive visualization on Google Cloud Platform.</p>
-                
-                <div class="badge">
-                    🏆 Google Cloud Data Analytics Certified
+            <div class="container" style="position:relative;">
+                <div class="hero-bg-svg">
+                    <svg width="100%" height="100%" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="720" cy="300" rx="700" ry="220" fill="url(#paint0_radial)" fill-opacity="0.3"/>
+                        <defs>
+                            <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientTransform="translate(720 300) scale(700 220)" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#007AFF"/>
+                                <stop offset="1" stop-color="#000" stop-opacity="0"/>
+                            </radialGradient>
+                        </defs>
+                    </svg>
                 </div>
-                
+                <h1 class="fade-in">Kenneth Kebaara</h1>
+                <div class="hero-subtitle fade-in" style="animation-delay:0.2s">Data Analytics & Cloud Specialist</div>
+                <p class="fade-in" style="animation-delay:0.4s">Transforming financial data into intelligent insights through advanced analytics, machine learning, and interactive visualization on Google Cloud Platform.</p>
+                <div class="badge fade-in" style="animation-delay:0.6s">
+                    <span style="font-size:20px; margin-right:8px;">🏆</span> Google Cloud Data Analytics Certified
+                </div>
                 <br><br>
-                <a href="#projects" class="cta-button">View Work</a>
+                <a href="#projects" class="cta-button pulse fade-in" style="animation-delay:0.8s">View Work</a>
             </div>
         </section>
 
@@ -823,20 +921,20 @@
             <div class="container">
                 <h2 class="section-title">Expertise</h2>
                 <div class="skills-grid">
-                    <div class="skill-card">
-                        <h3>Cloud Analytics</h3>
+                    <div class="skill-card fade-in" style="animation-delay:0.2s">
+                        <h3><span style="font-size:22px; margin-right:8px;">☁️</span>Cloud Analytics</h3>
                         <p>BigQuery, Cloud Storage, Dataflow, Pub/Sub, and advanced SQL for enterprise-scale data processing and analysis.</p>
                     </div>
-                    <div class="skill-card">
-                        <h3>Data Visualization</h3>
+                    <div class="skill-card fade-in" style="animation-delay:0.4s">
+                        <h3><span style="font-size:22px; margin-right:8px;">📊</span>Data Visualization</h3>
                         <p>Looker Studio, Looker Enterprise, interactive dashboards, and business intelligence solutions.</p>
                     </div>
-                    <div class="skill-card">
-                        <h3>Machine Learning</h3>
+                    <div class="skill-card fade-in" style="animation-delay:0.6s">
+                        <h3><span style="font-size:22px; margin-right:8px;">🤖</span>Machine Learning</h3>
                         <p>BigQuery ML, AutoML, predictive modeling, and statistical analysis for data-driven insights.</p>
                     </div>
-                    <div class="skill-card">
-                        <h3>Development</h3>
+                    <div class="skill-card fade-in" style="animation-delay:0.8s">
+                        <h3><span style="font-size:22px; margin-right:8px;">💻</span>Development</h3>
                         <p>Python, SQL, LookML, Git, APIs, and cloud-native application development.</p>
                     </div>
                 </div>
@@ -1113,16 +1211,17 @@
                 <p style="font-size: 18px; color: var(--text-tertiary); max-width: 500px; margin: 0 auto;">Ready to transform your data into intelligent insights? Let's build something extraordinary together.</p>
                 
                 <div class="contact-info">
-                    <a href="mailto:your.email@gmail.com" class="contact-item">
-                        <span>✉</span>
-                        <span>kkebaara@yahoo.com</span>
+                    <a href="mailto:kkebaara@yahoo.com" class="contact-item fade-in" style="animation-delay:0.2s">
+                        <span style="font-size:22px;">✉️</span>
+                        <span>Email</span>
+                        <span style="font-size:16px; color:var(--accent-green); margin-left:8px;">kkebaara@yahoo.com</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/kkebaara/" class="contact-item">
-                        <span>💼</span>
+                    <a href="https://www.linkedin.com/in/kkebaara/" class="contact-item fade-in" style="animation-delay:0.4s">
+                        <span style="font-size:22px;">�</span>
                         <span>LinkedIn</span>
                     </a>
-                    <a href="https://github.com/kkebaara" class="contact-item">
-                        <span>💻</span>
+                    <a href="https://github.com/kkebaara" class="contact-item fade-in" style="animation-delay:0.6s">
+                        <span style="font-size:22px;">�</span>
                         <span>GitHub</span>
                     </a>
                 </div>
@@ -1131,9 +1230,9 @@
     </main>
 
     <footer>
-        <div class="container">
+        <div class="container fade-in" style="animation-delay:0.2s">
             <p>&copy; 2025 Kenneth Kebaara - Data Analytics Portfolio. Crafted with precision and passion.</p>
-            <p style="margin-top: 8px;">Powered by Google Cloud Platform</p>
+            <p style="margin-top: 8px; color:var(--accent-green);">Powered by Google Cloud Platform</p>
         </div>
     </footer>
 
@@ -1172,270 +1271,25 @@
         }
 
         function initializePieChart() {
-            const ctx = document.getElementById('pieChart').getContext('2d');
-            
-            pieChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(loanData.statusDistribution),
-                    datasets: [{
-                        data: Object.values(loanData.statusDistribution),
-                        backgroundColor: [
-                            '#007AFF',  // Primary Blue
-                            '#30D158',  // Green
-                            '#FF9F0A',  // Orange
-                            '#FF453A',  // Red
-                            '#BF5AF2'   // Purple
-                        ],
-                        borderWidth: 0,
-                        hoverOffset: 8
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '60%',
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                boxWidth: 12,
-                                font: {
-                                    size: 12,
-                                    family: 'Inter'
-                                },
-                                color: '#EBEBF599',
-                                padding: 16,
-                                generateLabels: function(chart) {
-                                    const data = chart.data;
-                                    return data.labels.map((label, i) => ({
-                                        text: `${label} ${data.datasets[0].data[i]}%`,
-                                        fillStyle: data.datasets[0].backgroundColor[i],
-                                        strokeStyle: data.datasets[0].backgroundColor[i],
-                                        lineWidth: 0,
-                                        index: i
-                                    }));
-                                }
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: '#1C1C1E',
-                            titleColor: '#FFFFFF',
-                            bodyColor: '#EBEBF5',
-                            borderColor: '#38383A',
-                            borderWidth: 1,
-                            cornerRadius: 8,
-                            titleFont: { family: 'Inter', weight: '600' },
-                            bodyFont: { family: 'Inter' },
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.parsed}%`;
-                                }
-                            }
-                        }
-                    },
-                    onClick: (event, elements) => {
-                        if (elements.length > 0 && crossFilterEnabled) {
-                            const index = elements[0].index;
-                            const status = Object.keys(loanData.statusDistribution)[index];
-                            applyStatusFilter(status);
-                        }
-                    },
-                    onHover: (event, elements) => {
-                        event.native.target.style.cursor = elements.length > 0 ? 'pointer' : 'default';
-                    }
-                }
+            // ...existing code...
+        }
+
+        // Add fade-in animation for elements
+        function addInteractiveFeatures() {
+            document.querySelectorAll('.fade-in').forEach((el, i) => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    el.style.opacity = 1;
+                    el.style.transform = 'translateY(0)';
+                }, 200 + i * 150);
             });
         }
 
-        function initializeBarChart() {
-            const ctx = document.getElementById('barChart').getContext('2d');
-            
-            barChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(loanData.stateCounts),
-                    datasets: [{
-                        label: 'Loan Count',
-                        data: Object.values(loanData.stateCounts),
-                        backgroundColor: '#007AFF',
-                        borderRadius: 6,
-                        borderSkipped: false,
-                        hoverBackgroundColor: '#0056CC'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: '#1C1C1E',
-                            titleColor: '#FFFFFF',
-                            bodyColor: '#EBEBF5',
-                            borderColor: '#38383A',
-                            borderWidth: 1,
-                            cornerRadius: 8,
-                            titleFont: { family: 'Inter', weight: '600' },
-                            bodyFont: { family: 'Inter' },
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.parsed.y.toLocaleString()} loans`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: '#38383A',
-                                drawBorder: false
-                            },
-                            ticks: {
-                                color: '#EBEBF599',
-                                font: { family: 'Inter', size: 12 },
-                                callback: function(value) {
-                                    return value >= 1000 ? (value/1000) + 'K' : value;
-                                }
-                            }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: {
-                                color: '#EBEBF599',
-                                font: { family: 'Inter', size: 12 }
-                            }
-                        }
-                    },
-                    onClick: (event, elements) => {
-                        if (elements.length > 0 && crossFilterEnabled) {
-                            const index = elements[0].index;
-                            const state = Object.keys(loanData.stateCounts)[index];
-                            applyStateFilter(state);
-                        }
-                    },
-                    onHover: (event, elements) => {
-                        event.native.target.style.cursor = elements.length > 0 ? 'pointer' : 'default';
-                    }
-                }
-            });
-        }
-
-        // Interactive functions
-        function toggleCrossFilter() {
-            crossFilterEnabled = !crossFilterEnabled;
-            const button = event.target;
-            if (crossFilterEnabled) {
-                button.classList.add('active');
-                button.textContent = 'Cross-Filter';
-            } else {
-                button.classList.remove('active');
-                button.textContent = 'Cross-Filter';
-            }
-            showNotification(crossFilterEnabled ? 'Cross-filtering enabled' : 'Cross-filtering disabled');
-        }
-
-        function refreshDashboard() {
-            const button = event.target;
-            button.textContent = 'Refreshing...';
-            button.disabled = true;
-            
-            document.querySelector('.kpi-card').classList.add('pulse');
-            
-            setTimeout(() => {
-                const currentAmount = 3.08;
-                const variation = (Math.random() - 0.5) * 0.2;
-                const newAmount = (currentAmount + variation).toFixed(2);
-                
-                document.getElementById('loanAmount').textContent = `${newAmount}B`;
-                
-                button.textContent = 'Refresh';
-                button.disabled = false;
-                document.querySelector('.kpi-card').classList.remove('pulse');
-                
-                showNotification('Dashboard refreshed');
-            }, 1500);
-        }
-
-        function exportData() {
-            showNotification('Exporting data...');
-            setTimeout(() => showNotification('Data exported successfully'), 1000);
-        }
-
-        function applyFilters() {
-            const stateFilter = document.getElementById('stateFilter').value;
-            const statusFilter = document.getElementById('statusFilter').value;
-            const yearFilter = document.getElementById('yearFilter').value;
-            
-            selectedFilters = { state: stateFilter, status: statusFilter, year: yearFilter };
-            
-            updateChartsWithFilters();
-            updateTableWithFilters();
-            showNotification('Filters applied');
-        }
-
-        function applyStateFilter(state) {
-            document.getElementById('stateFilter').value = state;
-            selectedFilters.state = state;
-            updateChartsWithFilters();
-            updateTableWithFilters();
-            showNotification(`Filtered by: ${state}`);
-        }
-
-        function applyStatusFilter(status) {
-            document.getElementById('statusFilter').value = status;
-            selectedFilters.status = status;
-            updateChartsWithFilters();
-            updateTableWithFilters();
-            showNotification(`Filtered by: ${status}`);
-        }
-
-        function updateChartsWithFilters() {
-            pieChart.options.animation = { duration: 600, easing: 'easeInOutQuart' };
-            barChart.options.animation = { duration: 600, easing: 'easeInOutQuart' };
-            pieChart.update();
-            barChart.update();
-        }
-
-        function updateTableWithFilters() {
-            const tbody = document.getElementById('customerTableBody');
-            const rows = tbody.querySelectorAll('tr');
-            
-            rows.forEach(row => {
-                const state = row.children[2].textContent;
-                const shouldShow = selectedFilters.state === 'all' || selectedFilters.state === state;
-                
-                if (shouldShow) {
-                    row.style.display = '';
-                    row.classList.add('fade-in');
-                    setTimeout(() => row.classList.remove('fade-in'), 600);
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
-        function sortTable(columnIndex) {
-            const table = document.getElementById('customerTable');
-            const tbody = table.querySelector('tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-            
-            rows.sort((a, b) => {
-                const aVal = a.children[columnIndex].textContent;
-                const bVal = b.children[columnIndex].textContent;
-                
-                if (columnIndex === 1) {
-                    return parseFloat(bVal.replace(/[$,]/g, '')) - parseFloat(aVal.replace(/[$,]/g, ''));
-                } else if (columnIndex === 3) {
-                    return parseFloat(bVal.replace('%', '')) - parseFloat(aVal.replace('%', ''));
-                }
-                
-                return aVal.localeCompare(bVal);
-            });
-            
-            rows.forEach(row => tbody.appendChild(row));
-            showNotification('Table sorted');
+        // Hamburger menu for mobile
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
         }
 
         function selectRow(row) {
