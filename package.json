@@ -1,0 +1,12 @@
+{
+  "name": "data-analyst-portfolio",
+  "version": "1.0.0",
+  "description": "Data Analytics Portfolio - Kenneth Kebaara",
+  "private": true,
+  "scripts": {
+    "test": "node tests/dashboard.test.js",
+    "start": "npx serve . -p 3000",
+    "lint:css": "echo 'Add stylelint or npm run lint when needed'",
+    "lint:js": "echo 'Add eslint when needed'"
+  }
+}
